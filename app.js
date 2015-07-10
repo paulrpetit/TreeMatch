@@ -43,8 +43,7 @@ map.on('move', function() {
           this.className += ' active';
           // When a menu item is clicked, animate the map to center
           // its associated marker and open its popup.
-          map.panTo(marker.getLatLng());
-          marker.openPopup();
+          map.setView(marker.getLatLng(), 23);
         }
         return false;
       };
@@ -72,8 +71,7 @@ map.on('move', function() {
 
           // When a menu item is clicked, animate the map to center
           // its associated marker and open its popup.
-          map.panTo(marker.getLatLng());
-          marker.openPopup();
+          map.setView(marker.getLatLng(), 23);
         }
         return false;
       };
@@ -85,3 +83,13 @@ map.on('move', function() {
 map.fitBounds(DavyLayer.getBounds());
 
 //CSV creation and export
+var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+var csvContent = "data:text/csv;charset=utf-8,";
+data.forEach(function(infoArray, index){
+   dataString = infoArray.join(",");
+   csvContent += index < data.length ? dataString+ "\n" : dataString;
+});
+var downloadCSV = function(csvContent){
+  var encodedUri = encodeURI(csvContent);
+  window.open(encodedUri);
+}
