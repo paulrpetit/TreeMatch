@@ -18,7 +18,7 @@ map.on('move', function() {
   var bounds = map.getBounds();
   //remove existing elements from table
   while (tableBodyDavy.firstChild) {
-      tableBodyDavy.removeChild(tableBodyDavy.firstChild);
+    tableBodyDavy.removeChild(tableBodyDavy.firstChild);
   }
   while (tableBodyDPW.firstChild) {
     tableBodyDPW.removeChild(tableBodyDPW.firstChild);
@@ -29,7 +29,7 @@ map.on('move', function() {
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
-      link.innerHTML = '<td></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td>';
+      link.innerHTML = '<td value='+marker._leaflet_id+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
@@ -56,7 +56,7 @@ map.on('move', function() {
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
-      link.innerHTML = '<td></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td>';
+      link.innerHTML = '<td value='+marker._leaflet_id+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
@@ -81,13 +81,34 @@ map.on('move', function() {
 // When map loads, zoom to libraryLayer features
 map.fitBounds(DavyLayer.getBounds());
 
+
+
 //CSV creation and export
-var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+var data = [["clickCounter", "DavyID", "DPW-ID"]];
 var csvContent = "data:text/csv;charset=utf-8,";
-data.forEach(function(infoArray, index){
-   dataString = infoArray.join(",");
-   csvContent += index < data.length ? dataString+ "\n" : dataString;
-});
+var clickCounter = 1;
+//match function adds selected features to data for csv
+var matchSelected = function() {
+  clickCounter++
+  var davySelected = tableBodyDavy.getElementsByClassName('active');
+  var davyID = davySelected[0].childNodes[0].innerText;
+
+  var DpwSelected = tableBodyDPW.getElementsByClassName('active');
+  var DpwID = DpwSelected[0].childNodes[0].innerText;
+
+  data[clickCounter] = new Array(3);
+  data[clickCounter][0] = clickCounter - 2;
+  data[clickCounter][1] = davyID;
+  data[clickCounter][2] = DpwID;
+
+  data.forEach(function(infoArray, index){
+    dataString = infoArray.join(",");
+    csvContent += index < data.length ? dataString+ "\n" : dataString;
+  });
+  console.log(csvContent);
+};
+
+
 var downloadCSV = function(csvContent){
   var encodedUri = encodeURI(csvContent);
   window.open(encodedUri);
