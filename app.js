@@ -7,12 +7,7 @@ var DPWLayer = L.mapbox.featureLayer().addTo(map);
 var DavyLayer = L.mapbox.featureLayer().addTo(map);
 
 DavyLayer.setGeoJSON(davy);
-
-var RADIUS = 400; // in feet; TODO add interactive level
-var bufferDavy;
-var withinBuffer;
-var bufferDavyLayer = L.mapbox.featureLayer().addTo(map);
-
+DPWLayer.setGeoJSON(DPW);
 // On map move, determine if point lies within bounding box
 // run buffer on davy points and test which points lie within
 // add within dpw points to the html table
@@ -24,10 +19,7 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within buffer and append table head
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      bufferDavy = turf.buffer(davy, RADIUS, 'feet');
-      withinBuffer = turf.within(DPW, bufferDavy);
-      DPWLayer.setGeoJSON(withinBuffer);
-      DavyInBounds.push('<tr><th><div class="checkbox-pill"><input type="checkbox" id='+marker._leaflet_id+' ><label for='+marker._leaflet_id+' class="button icon check fill-mustard short"></label></div></th><th>'+marker._leaflet_id+'</th><th>'+marker.feature.properties.name+'</th><th>Another Attribute</th></tr>');
+      DavyInBounds.push('<tr><td><div class="checkbox-pill"><input type="checkbox" id='+marker._leaflet_id+' ><label for='+marker._leaflet_id+' class="button icon check fill-mustard short"></label></div></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Another Attribute</td></tr>');
     }
   });
   // concatenate html and set it for Davy
