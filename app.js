@@ -41,8 +41,8 @@ map.on('move', function() {
             .replace(/active/, '').replace(/\s\s*$/, '');
           };
           this.className += ' active';
-          // When a menu item is clicked, animate the map to center
-          // its associated marker and open its popup.
+        }
+        link.ondblclick = function(){
           map.setView(marker.getLatLng(), 23);
         }
         return false;
@@ -68,9 +68,8 @@ map.on('move', function() {
               .replace(/active/, '').replace(/\s\s*$/, '');
           };
           this.className += ' active';
-
-          // When a menu item is clicked, animate the map to center
-          // its associated marker and open its popup.
+        }
+        link.ondblclick = function(){
           map.setView(marker.getLatLng(), 23);
         }
         return false;
