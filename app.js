@@ -19,8 +19,13 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within buffer and append table head
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      DavyInBounds.push('<tr><td><div class="checkbox-pill"><input type="checkbox" id='+marker._leaflet_id+' ><label for='+marker._leaflet_id+' class="button icon check fill-mustard short"></label></div></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Another Attribute</td></tr>');
+      DavyInBounds.push('<tr class="" id='+marker._leaflet_id+'><td>'+marker._leaflet_id+'</td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Another Attribute</td></tr>');
     }
+    $('#'+ marker._leaflet_id, 'tr').click(function(){
+      map.featureLayer.setFilter(function(f) {
+        return true;
+      });
+    });
   });
   // concatenate html and set it for Davy
   DavyInBoundsConcat = "";
@@ -32,7 +37,7 @@ map.on('move', function() {
   // on each DPW layer append table body
   DPWLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      DPWInBounds.push('<tr><td><div class="checkbox-pill"><input type="checkbox" id='+marker._leaflet_id+' ><label for='+marker._leaflet_id+' class="button icon check fill-green short"></label></div></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>plus some</td></tr>');
+      DPWInBounds.push('<tr class="" id='+marker._leaflet_id+'><td>'+marker._leaflet_id+'</td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Another Attribute</td></tr>');
     }
   });
   // concatenate html and set it for DPW
