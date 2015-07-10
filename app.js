@@ -26,21 +26,21 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within bbox and append table
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      var link = tableBodyDavy.appendChild(document.createElement('a'));
-      link.className = 'item';
+      var link = tableBodyDavy.appendChild(document.createElement('tr'));
+      link.className = marker._leaflet_id;
       link.href = '#';
-      link.innerHTML = '<tr class="" id='+marker._leaflet_id+'><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td></tr><br>';
+      link.innerHTML = '<td></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
-        } else {
-          var siblings = tableBodyDavy.getElementsByTagName('a');
+        } 
+        else {
+          var siblings = tableBodyDavy.getElementsByTagName('tr');
           for (var i = 0; i < siblings.length; i++) {
             siblings[i].className = siblings[i].className
-              .replace(/active/, '').replace(/\s\s*$/, '');
+            .replace(/active/, '').replace(/\s\s*$/, '');
           };
           this.className += ' active';
-
           // When a menu item is clicked, animate the map to center
           // its associated marker and open its popup.
           map.panTo(marker.getLatLng());
@@ -54,15 +54,16 @@ map.on('move', function() {
   // on each DPW layer append table body
   DPWLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      var link = tableBodyDPW.appendChild(document.createElement('a'));
+      var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
-      link.innerHTML = '<tr class="" id='+marker._leaflet_id+'><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td></tr><br>';
+      link.innerHTML = '<td></td><td>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
-        } else {
-          var siblings = tableBodyDPW.getElementsByTagName('a');
+        } 
+        else {
+          var siblings = tableBodyDPW.getElementsByTagName('tr');
           for (var i = 0; i < siblings.length; i++) {
             siblings[i].className = siblings[i].className
               .replace(/active/, '').replace(/\s\s*$/, '');
@@ -82,3 +83,5 @@ map.on('move', function() {
 
 // When map loads, zoom to libraryLayer features
 map.fitBounds(DavyLayer.getBounds());
+
+//CSV creation and export
