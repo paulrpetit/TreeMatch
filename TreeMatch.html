@@ -29,9 +29,9 @@
       <div class='col12 pad2 center fill-green dark'>
         <h3><span class="icon landuse big"></span>Tree Match<span class="icon landuse big"></span></h3>
       </div>
-      <a href='#' class='block pad1y pad2x keyline-bottom'>Guide</a>
-      <a href='#' class='block pad1y pad2x keyline-bottom'>About</a>
-      <a href='#' class='block pad1y pad2x keyline-bottom'>Contact</a>
+      <a href='#guide' class='block pad4y  center keyline-bottom' style="height:100px;">Guide</a>
+      <a href='#about' class='block pad4y center keyline-bottom' style="height:100px;">About</a>
+      <a href='#contact' class='block pad4y center keyline-bottom' style="height:100px;">Contact</a>
     </nav>
     <div class='col9 pad2 fill-white'>
       <div class="col12 space-bottom" id="map" style="height:400px;"></div>
@@ -53,7 +53,7 @@
         </tbody>
       </table>
       <div class='pad1y center'>
-        <a href='#' onclick="matchSelected()" class='icon check button fill-green'>Match</a>
+        <a href='#match' id="match" onclick="matchSelected()" class='icon check button fill-green'>Match</a>
       </div>
       <table>
         <thead>
@@ -72,6 +72,27 @@
         <tbody id="DPW">
         </tbody>
       </table>
+      <div class='pad1y center'>
+        <a href='#downloadCSV' onclick="downloadCSV()" id='downloadCSV' class='icon document button fill-mustard'>CSV</a>
+      </div>
+      <div id="guide" class="box round fill-light">
+        <div class="pad2">
+          <h3 class="title">Guide</h3>
+          <p> hello guide </p>
+        </div>
+      </div>
+      <div id="about" class="box round fill-light">
+        <div class="pad2">
+          <h3 class="title">About</h3>
+          <p> hello about </p>
+        </div>
+      </div>
+      <div id="contact" class="box round fill-light">
+        <div class="pad2">
+          <h3 class="contact">Contact</h3>
+          <p> hello contact </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

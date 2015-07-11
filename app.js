@@ -85,31 +85,58 @@ map.fitBounds(DavyLayer.getBounds());
 
 //CSV creation and export
 var data = [["clickCounter", "DavyID", "DPW-ID"]];
-var csvContent = "data:text/csv;charset=utf-8,";
+var csvContent = "";
 var clickCounter = 1;
 //match function adds selected features to data for csv
 var matchSelected = function() {
   clickCounter++
+
   var davySelected = tableBodyDavy.getElementsByClassName('active');
   var davyID = davySelected[0].childNodes[0].innerText;
 
   var DpwSelected = tableBodyDPW.getElementsByClassName('active');
   var DpwID = DpwSelected[0].childNodes[0].innerText;
 
-  data[clickCounter] = new Array(3);
-  data[clickCounter][0] = clickCounter - 2;
-  data[clickCounter][1] = davyID;
-  data[clickCounter][2] = DpwID;
+  if (davyID && DpwID) {
+    data[clickCounter] = new Array(3);
+    data[clickCounter][0] = clickCounter - 2;
+    data[clickCounter][1] = davyID;
+    data[clickCounter][2] = DpwID;
 
-  data.forEach(function(infoArray, index){
-    dataString = infoArray.join(",");
-    csvContent += index < data.length ? dataString+ "\n" : dataString;
-  });
+    data.forEach(function(infoArray, index){
+      dataString = infoArray.join(",");
+      csvContent += index < data.length ? dataString+ "\n" : dataString;
+    });
+  }
   console.log(csvContent);
 };
 
+var download = function(content, fileName, mimeType) {
+  var a = document.createElement('a');
+  mimeType = mimeType || 'application/octet-stream';
 
-var downloadCSV = function(csvContent){
-  var encodedUri = encodeURI(csvContent);
-  window.open(encodedUri);
+  if (navigator.msSaveBlob) { // IE10
+    return navigator.msSaveBlob(new Blob([content], { type: mimeType }), fileName);
+  } else if ('download' in a) { //html5 A[download]
+    a.href = 'data:' + mimeType + ',' + encodeURIComponent(content);
+    a.setAttribute('download', fileName);
+    document.body.appendChild(a);
+    setTimeout(function() {
+      a.click();
+      document.body.removeChild(a);
+    }, 66);
+    return true;
+  } else { //do iframe dataURL download (old ch+FF):
+    var f = document.createElement('iframe');
+    document.body.appendChild(f);
+    f.src = 'data:' + mimeType + ',' + encodeURIComponent(content);
+
+    setTimeout(function() {
+      document.body.removeChild(f);
+    }, 333);
+    return true;
+  }
+}
+var downloadCSV = function() {
+  download(csvContent, 'treeMatch.csv', 'text/csv');
 }
