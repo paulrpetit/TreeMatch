@@ -2,12 +2,24 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmxvdmF0byIsImEiOiJmcXN6S1YwIn0.xr8I64KZ2GNjEoONxqH42g';
 var map = L.mapbox.map('map', 'mapbox.light', {
   zoomControl: false
-}).setView([37.72179825834007,-122.47588634490967], 18);
+}).setView([37.76,-122.48], 18);
 var DPWLayer = L.mapbox.featureLayer().addTo(map);
 var DavyLayer = L.mapbox.featureLayer().addTo(map);
 
 DavyLayer.setGeoJSON(davy);
 DPWLayer.setGeoJSON(DPW);
+
+/* Set marker and popup properties for each layer
+DavyLayer.eachLayer(function(marker){
+  marker.feature.properties.marker-color = "#fbb03b";
+  marker.feature.properties.marker-size = "small";
+});
+
+DPWLayer.eachLayer(function(marker){
+  marker.feature.properties.marker-color = "#f1f075";
+  marker.feature.properties.marker-size = "small";
+});
+*/
 // On map move, determine if point lies within bounding box
 // run buffer on davy points and test which points lie within
 // add within dpw points to the html table
@@ -26,11 +38,10 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within bbox and append table
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      console.log(marker);
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
-      link.innerHTML = '<td value='+marker._leaflet_id+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td>';
+      link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
@@ -57,7 +68,7 @@ map.on('move', function() {
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
-      link.innerHTML = '<td value='+marker._leaflet_id+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td>';
+      link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
@@ -89,10 +100,10 @@ var matchSelected = function() {
   clickCounter++
 
   var davySelected = tableBodyDavy.getElementsByClassName('active');
-  var davyID = davySelected[0].childNodes[0].innerText;
+  var davyID = davySelected[0].childNodes[0].getAttribute('value');
 
   var DpwSelected = tableBodyDPW.getElementsByClassName('active');
-  var DpwID = DpwSelected[0].childNodes[0].innerText;
+  var DpwID = DpwSelected[0].childNodes[0].getAttribute('value');
 
   if (davyID && DpwID) {
     data[clickCounter] = new Array(3);
@@ -105,7 +116,7 @@ var matchSelected = function() {
       csvContent += index < data.length ? dataString+ "\n" : dataString;
     });
   }
-  console.log(csvContent);
+  console.log('CSV' + csvContent);
 };
 
 var download = function(content, fileName, mimeType) {
