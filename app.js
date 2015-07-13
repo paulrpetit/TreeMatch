@@ -2,7 +2,7 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmxvdmF0byIsImEiOiJmcXN6S1YwIn0.xr8I64KZ2GNjEoONxqH42g';
 var map = L.mapbox.map('map', 'mapbox.light', {
   zoomControl: false
-}).setView([37.7, -122], 9);
+}).setView([37.72179825834007,-122.47588634490967], 18);
 var DPWLayer = L.mapbox.featureLayer().addTo(map);
 var DavyLayer = L.mapbox.featureLayer().addTo(map);
 
@@ -26,6 +26,7 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within bbox and append table
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
+      console.log(marker);
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
@@ -77,10 +78,6 @@ map.on('move', function() {
     }
   });
 });
-
-// When map loads, zoom to libraryLayer features
-map.fitBounds(DavyLayer.getBounds());
-
 
 
 //CSV creation and export
