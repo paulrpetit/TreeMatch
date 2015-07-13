@@ -41,7 +41,9 @@ map.on('move', function() {
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
-      link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>Davy</td>';
+      console.log('Davy:');
+      console.log(marker.feature.properties);
+      link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</td><td>'+marker.feature.properties.BOTANICAL+'</td><td>Davy</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
@@ -68,7 +70,9 @@ map.on('move', function() {
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
-      link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker._leaflet_id+'</td><td>'+marker.feature.properties.name+'</td><td>DPW</td>';
+      console.log('DPW:');
+      console.log(marker.feature.properties);
+      link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</td><td>'+marker.feature.properties.LatinName+'</td><td>DPW</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
