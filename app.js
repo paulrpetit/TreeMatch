@@ -3,23 +3,24 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiYmxvdmF0byIsImEiOiJmcXN6S1YwIn0.xr8I64KZ2GNjE
 var map = L.mapbox.map('map', 'mapbox.light', {
   zoomControl: false
 }).setView([37.76,-122.48], 18);
+
+// Set marker and popup properties for each layer
+for(i=0; i< davy.features.length; i++){
+  davy.features[i].properties['marker-color'] = "#fbb03b";
+  davy.features[i].properties['marker-size'] = "small";
+}
+
+for(i=0; i< DPW.features.length; i++){
+  DPW.features[i].properties['marker-color'] = "#fbb03b";
+  DPW.features[i].properties['marker-size'] = "small";
+}
+
 var DPWLayer = L.mapbox.featureLayer().addTo(map);
 var DavyLayer = L.mapbox.featureLayer().addTo(map);
 
 DavyLayer.setGeoJSON(davy);
 DPWLayer.setGeoJSON(DPW);
 
-/* Set marker and popup properties for each layer
-DavyLayer.eachLayer(function(marker){
-  marker.feature.properties.marker-color = "#fbb03b";
-  marker.feature.properties.marker-size = "small";
-});
-
-DPWLayer.eachLayer(function(marker){
-  marker.feature.properties.marker-color = "#f1f075";
-  marker.feature.properties.marker-size = "small";
-});
-*/
 // On map move, determine if point lies within bounding box
 // run buffer on davy points and test which points lie within
 // add within dpw points to the html table
