@@ -1,6 +1,6 @@
 //basic map
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmxvdmF0byIsImEiOiJmcXN6S1YwIn0.xr8I64KZ2GNjEoONxqH42g';
-var map = L.mapbox.map('map', 'mapbox.light', {
+var map = L.mapbox.map('map', 'mapbox.streets-satellite', {
   zoomControl: false
 }).setView([37.76,-122.48], 18);
 
@@ -101,16 +101,15 @@ map.on('move', function() {
 
 
 //CSV creation and export
-var data = [["clickCounter", "DavyID", "DPW-ID"]];
+var data = [["Number of Match", "DavyID", "DPW-ID"]];
 var csvContent = "";
 var clickCounter = 1;
 //match function adds selected features to data for csv
 var matchSelected = function() {
   clickCounter++
-
+  csvContent = "";
   var davySelected = tableBodyDavy.getElementsByClassName('active');
   var davyID = davySelected[0].childNodes[0].getAttribute('value');
-
   var DpwSelected = tableBodyDPW.getElementsByClassName('active');
   var DpwID = DpwSelected[0].childNodes[0].getAttribute('value');
 
