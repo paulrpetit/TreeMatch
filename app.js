@@ -78,7 +78,7 @@ map.on('move', function() {
       link.className = 'item';
       link.href = '#';
       console.log('DPW:');
-      console.log(marker.feature.properties);
+      console.log(marker);
       link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</td><td>'+marker.feature.properties.LatinName+'</td><td>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</td><td>'+marker.feature.properties.SiteOrder+'</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
@@ -96,6 +96,7 @@ map.on('move', function() {
         link.ondblclick = function(){
           map.setView(marker.getLatLng(), 23);
         }
+
         return false;
       };
     }
