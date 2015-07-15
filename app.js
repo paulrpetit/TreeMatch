@@ -15,8 +15,8 @@ for(i=0; i< DPW.features.length; i++){
   DPW.features[i].properties['marker-size'] = "small";
 }
 
-var DPWLayer = L.mapbox.featureLayer().addTo(map);
-var DavyLayer = L.mapbox.featureLayer().addTo(map);
+var DPWLayer = L.mapbox.featureLayer();
+var DavyLayer = L.mapbox.featureLayer();
 
 DavyLayer.setGeoJSON(davy);
 DPWLayer.setGeoJSON(DPW);
@@ -40,9 +40,11 @@ map.on('move', function() {
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
       marker.bindPopup('<h3 value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</h3><p>'+marker.feature.properties.ADDRESS+ ' ' +marker.feature.properties.STREET+'</p>');
+      marker.addTo(map);
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
+
       console.log('Davy:');
       console.log(marker.feature.properties);
       link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</td><td>'+marker.feature.properties.BOTANICAL+'</td><td>'+marker.feature.properties.ADDRESS+ ' ' +marker.feature.properties.STREET+'</td><td>'+marker.feature.properties.SEQUENCE+'</td>';
@@ -71,6 +73,7 @@ map.on('move', function() {
   DPWLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
       marker.bindPopup('<h3 value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</h3><p>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</p>');
+      marker.addTo(map);
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
@@ -123,8 +126,8 @@ var matchSelected = function() {
       dataString = infoArray.join(",");
       csvContent += index < data.length ? dataString+ "\n" : dataString;
     });
+
   }
-  console.log('CSV' + csvContent);
 };
 
 var download = function(content, fileName, mimeType) {
