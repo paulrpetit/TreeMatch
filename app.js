@@ -6,7 +6,7 @@ var map = L.mapbox.map('map', 'mapbox.light', {
 
 // Set marker and popup properties for each layer
 for(i=0; i< davy.features.length; i++){
-  davy.features[i].properties['marker-color'] = "#fbb03b";
+  davy.features[i].properties['marker-color'] = "#56b881";
   davy.features[i].properties['marker-size'] = "small";
 }
 
@@ -39,17 +39,19 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within bbox and append table
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
+      marker.bindPopup('<h3 value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</h3><p>'+marker.feature.properties.ADDRESS+ ' ' +marker.feature.properties.STREET+'</p>');
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
       console.log('Davy:');
       console.log(marker.feature.properties);
-      link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</td><td>'+marker.feature.properties.BOTANICAL+'</td><td>Davy</td>';
+      link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</td><td>'+marker.feature.properties.BOTANICAL+'</td><td>'+marker.feature.properties.ADDRESS+ ' ' +marker.feature.properties.STREET+'</td><td>'+marker.feature.properties.SEQUENCE+'</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
         } 
         else {
+          marker.openPopup();
           var siblings = tableBodyDavy.getElementsByTagName('tr');
           for (var i = 0; i < siblings.length; i++) {
             siblings[i].className = siblings[i].className
@@ -68,17 +70,19 @@ map.on('move', function() {
   // on each DPW layer append table body
   DPWLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
+      marker.bindPopup('<h3 value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</h3><p>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</p>');
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
       console.log('DPW:');
       console.log(marker.feature.properties);
-      link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</td><td>'+marker.feature.properties.LatinName+'</td><td>DPW</td>';
+      link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</td><td>'+marker.feature.properties.LatinName+'</td><td>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</td><td>'+marker.feature.properties.SiteOrder+'</td>';
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
         } 
         else {
+          marker.openPopup();
           var siblings = tableBodyDPW.getElementsByTagName('tr');
           for (var i = 0; i < siblings.length; i++) {
             siblings[i].className = siblings[i].className
