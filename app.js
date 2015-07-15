@@ -103,7 +103,7 @@ map.on('move', function() {
 //CSV creation and export
 var data = [["Number of Match", "DavyID", "DPW-ID"]];
 var csvContent = "";
-var clickCounter = 1;
+var clickCounter = 0;
 //match function adds selected features to data for csv
 var matchSelected = function() {
   clickCounter++
@@ -115,7 +115,7 @@ var matchSelected = function() {
 
   if (davyID && DpwID) {
     data[clickCounter] = new Array(3);
-    data[clickCounter][0] = clickCounter - 2;
+    data[clickCounter][0] = clickCounter - 1;
     data[clickCounter][1] = davyID;
     data[clickCounter][2] = DpwID;
 
