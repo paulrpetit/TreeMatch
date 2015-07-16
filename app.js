@@ -51,7 +51,6 @@ map.on('move', function() {
   // on each Davy layer calulate if DPW lies within bbox and append table
   DavyLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      console.log(marker);
       marker.bindPopup('<h3 value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</h3><p>'+marker.feature.properties.ADDRESS+ ' ' +marker.feature.properties.STREET+'</p><a target="_blank" href="https://maps.google.com?layer=c&cbll=' +marker.feature.geometry.coordinates[1]+ ',' + marker.feature.geometry.coordinates[0] +'">Google Street View</a>'); 
       marker.addTo(map);
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
@@ -169,8 +168,20 @@ var matchSelected = function() {
   }
   var link = tableBodyMatches.appendChild(document.createElement('tr'));
   link.innerHTML = '<td value=>'+ data[clickCounter][0] +'</td><td>'+data[clickCounter][1]+'</td><td>'+data[clickCounter][2]+'</td>'
-};
 
+  /* create new line feature between matched points and add them to the group
+  var filteredDavy = turf.filter(davy, 'FID_1', Math.floor(davyID));
+  var filteredDPW = turf.filter(DPW, 'TreeID', Math.floor(DpwID));
+  var filteredDavyLatLng = L.Latlng(filteredDPW.features[0].geometry.coordinates[1], filteredDPW.features[0].geometry.coordinates[1]);
+  var filteredDPWLatLng = L.Latlng(filteredDPW.features[0].geometry.coordinates[1], filteredDPW.features[0].geometry.coordinates[1]);
+  var line = L.polyline([filteredDPWLatLng,filteredDavyLatLng], {color: '#56b881'});
+  matchLineGroup.addLayer(line);
+  */
+};
+var matchLineGroup = L.featureGroup().addTo(map);
+
+
+// convert csv data and download
 var download = function(content, fileName, mimeType) {
   var a = document.createElement('a');
   mimeType = mimeType || 'application/octet-stream';
@@ -197,6 +208,7 @@ var download = function(content, fileName, mimeType) {
     return true;
   }
 }
+// button click runs download function
 var downloadCSV = function() {
   download(csvContent, 'treeMatch.csv', 'text/csv');
 }
