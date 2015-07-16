@@ -1,7 +1,14 @@
+// toggle guide
+$('#guide-body').hide();
+$('#guide').click(function() {
+  $('#guide-body').toggle('fast');
+});
+
 //basic map
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmxvdmF0byIsImEiOiJmcXN6S1YwIn0.xr8I64KZ2GNjEoONxqH42g';
 var map = L.mapbox.map('map', 'mapbox.streets-satellite', {
-  zoomControl: false
+  zoomControl: false,
+  attributionControl: false
 }).setView([37.76,-122.48], 18);
 
 // Set marker and popup properties for each layer
@@ -123,7 +130,6 @@ map.on('move', function() {
         link.ondblclick = function(){
           map.setView(marker.getLatLng(), 23);
         }
-
         return false;
       };
     }

@@ -6,7 +6,7 @@
   <title>Tree Match DPW</title>
   <link rel='shortcut icon' href='img/favicon.ico' type='image/x-icon' />
   <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
-  <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
   <script src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
@@ -25,12 +25,14 @@
 <body>
   <div class='col12 clearfix fill-light'>
     <nav class='col3 v'>
-      <div class='col12 pad2 center fill-green dark' >
+      <div class='col12 pad2 center fill-green dark'>
         <h3><span class="icon landuse big"></span>Tree Match<span class="icon landuse big"></span></h3>
       </div>
-      <a href='#guide' class='block pad1y  center keyline-bottom' style="height:40px;">Guide</a>
-      <a href='#about' class='block pad1y center keyline-bottom' style="height:40px;">About</a>
-      <a href='#contact' class='block pad1y center keyline-bottom' style="height:40px;">Contact</a>
+      <a id="guide" href='#guide' class='block pad1y  center keyline-bottom' style="height:40px;">Guide</a>
+      <div id="guide-body" class="pad2 prose small keyline-bottom" style="padding-top:365px;">
+        <h3>guide body</h3>
+        <p>some text here</p>
+      </div>
     </nav>
     <div class='col9 pad2 fill-white' style="max-width:2000px !important;">
       <div class="col12 space-bottom" id="map" style="height:400px;"></div>
