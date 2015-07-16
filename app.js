@@ -3,6 +3,11 @@ $('#guide-body').hide();
 $('#guide').click(function() {
   $('#guide-body').toggle('fast');
 });
+//toggle match table
+$('#match-body').hide();
+$('#match-table').click(function() {
+  $('#match-body').toggle('fast');
+});
 
 //basic map
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmxvdmF0byIsImEiOiJmcXN6S1YwIn0.xr8I64KZ2GNjEoONxqH42g';
@@ -33,7 +38,7 @@ DPWLayer.setGeoJSON(DPW);
 // add within dpw points to the html table
 var tableBodyDavy = document.getElementById('davy');
 var tableBodyDPW = document.getElementById('DPW');
-
+var tableBodyMatches = document.getElementById('match-data');
 map.on('move', function() {
   var bounds = map.getBounds();
   //remove existing elements from table
@@ -161,8 +166,9 @@ var matchSelected = function() {
       dataString = infoArray.join(",");
       csvContent += index < data.length ? dataString+ "\n" : dataString;
     });
-
   }
+  var link = tableBodyMatches.appendChild(document.createElement('tr'));
+  link.innerHTML = '<td value=>'+ data[clickCounter][0] +'</td><td>'+data[clickCounter][1]+'</td><td>'+data[clickCounter][2]+'</td>'
 };
 
 var download = function(content, fileName, mimeType) {

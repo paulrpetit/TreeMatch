@@ -8,8 +8,10 @@
   <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
-  <script src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
+  <!--script src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script-->
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+  <script src="data/davy.json"></script>
+  <script src="data/DPW.json"></script>
   <style>
     body { margin:0; padding:0;}
     #map { position:relative; top:0; bottom:0; background-color: 'white';}
@@ -23,20 +25,40 @@
   </style>
 </head>
 <body>
-  <div class='col12 clearfix fill-light'>
+  <div class='col12 clearfix fill-white'>
     <nav class='col3 v'>
       <div class='col12 pad2 center fill-green dark'>
         <h3><span class="icon landuse big"></span>Tree Match<span class="icon landuse big"></span></h3>
       </div>
-      <a id="guide" href='#' class='block pad1y  center keyline-bottom' style="height:40px;">Guide</a>
+      <a id="guide" href='#' class='block pad1y center keyline-bottom' style="height:40px;">Guide</a>
+      <a id="match-table" href='#' class='block pad1y center keyline-bottom' style="height:40px;">Matches</a>
       <div id="guide-body" class="pad2 prose small keyline-bottom" style="padding-top:20px;">
         <h3>Introduction</h3>
         <p>This application was created to facilitate the manual matching of tree databases. SF DPW has a historical tree database that is not spatially accurate but a spatially accurate and updated tree survey is in the works. This application allows for the manual matching of the historical data to the updated data. The new and updated tree survey is called the <strong>'Davy Tree Survey'</strong> and the old historical data is simply known as the <strong>'DPW Tree Database'</strong>.</p>
         <h3>Matching</h3>
-        <p>some text here</p>
+        <p>To create a match between a tree in the 'Davy Tree Survey' layer and a tree in the 'DPW Tree Database' layer zoom to where both markers are on the map and select one record from each and press match. Some trees may be difficult to match or don't have a match, for this process only match the trees that are clearly a match. After creating matches you can press the CSV button to export a table with the headers.</p>
+      </div>
+      <div id="match-body" class="pad2 prose small keyline-bottom" style="padding-top:20px;">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                # of Match:
+              </th>
+              <th>
+                Davy ID:
+              </th>
+              <th>
+                DPW ID:
+              </th>
+            </tr>
+          </thead>
+          <tbody id="match-data">
+          </tbody>
+        </table>
       </div>
     </nav>
-    <div class='col9 pad2 fill-white' style="max-width:2000px !important;">
+    <div class='col9 pad2 fill-light' style="max-width:2000px !important;">
       <div class="col12 space-bottom" id="map" style="height:400px;"></div>
       <table>
         <thead>
@@ -86,8 +108,6 @@
       </div>
     </div>
   </div>
-<script src="data/davy.json"></script>
-<script src="data/DPW.json"></script>
 <script src="app.js"></script>
 </body>
 </html>
