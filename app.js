@@ -44,10 +44,23 @@ map.on('move', function() {
       var link = tableBodyDavy.appendChild(document.createElement('tr'));
       link.className = marker._leaflet_id;
       link.href = '#';
-
-      console.log('Davy:');
-      console.log(marker.feature.properties);
       link.innerHTML = '<td value='+marker.feature.properties.FID_1+'>'+marker.feature.properties.COMMON+'</td><td>'+marker.feature.properties.BOTANICAL+'</td><td>'+marker.feature.properties.ADDRESS+ ' ' +marker.feature.properties.STREET+'</td><td>'+marker.feature.properties.SEQUENCE+'</td>';
+      // on marker click, select record in table
+      marker.on('click', function() {
+        if (/active/.test(link.className)) {
+          link.className = link.className.replace(/active/, '').replace(/\s\s*$/, '');
+        } 
+        else {
+          var siblings = tableBodyDavy.getElementsByTagName('tr');
+          for (var i = 0; i < siblings.length; i++) {
+            siblings[i].className = siblings[i].className
+            .replace(/active/, '').replace(/\s\s*$/, '');
+          };
+          link.className += ' active';
+        }
+        return false;
+      });
+      // on click table record, change class and open popup on marker
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
@@ -77,9 +90,23 @@ map.on('move', function() {
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
       link.href = '#';
-      console.log('DPW:');
-      console.log(marker);
       link.innerHTML = '<td value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</td><td>'+marker.feature.properties.LatinName+'</td><td>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</td><td>'+marker.feature.properties.SiteOrder+'</td>';
+      // on marker click, select record in table
+      marker.on('click', function() {
+        if (/active/.test(link.className)) {
+          link.className = link.className.replace(/active/, '').replace(/\s\s*$/, '');
+        } 
+        else {
+          var siblings = tableBodyDPW.getElementsByTagName('tr');
+          for (var i = 0; i < siblings.length; i++) {
+            siblings[i].className = siblings[i].className
+            .replace(/active/, '').replace(/\s\s*$/, '');
+          };
+          link.className += ' active';
+        }
+        return false;
+      });
+      // on click table record, change class and open popup on marker
       link.onclick = function() {
         if (/active/.test(this.className)) {
           this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
