@@ -97,7 +97,7 @@ map.on('move', function() {
   // on each DPW layer append table body
   DPWLayer.eachLayer(function(marker) {
     if (bounds.contains(marker.getLatLng())) {
-      marker.bindPopup('<h3 value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</h3><p>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</p><a style="color:#56b881 !important;" target="_blank" href="https://maps.google.com?layer=c&cbll=' +marker.feature.geometry.coordinates[1]+ ',' + marker.feature.geometry.coordinates[0] +'">Google Street View</a>');
+      marker.bindPopup('<h3 value='+marker.feature.properties.TreeID+'>'+marker.feature.properties.CommonName+'</h3><p>'+marker.feature.properties.AddressNo+ ' ' +marker.feature.properties.Street+'</p><a target="_blank" href="https://maps.google.com?layer=c&cbll=' +marker.feature.geometry.coordinates[1]+ ',' + marker.feature.geometry.coordinates[0] +'">Google Street View</a>');
       marker.addTo(map);
       var link = tableBodyDPW.appendChild(document.createElement('tr'));
       link.className = 'item';
@@ -179,8 +179,17 @@ var matchSelected = function() {
 
   var line = L.polyline([filteredDPWLatLng,filteredDavyLatLng], {color: '#56b881', opacity: '1'});
   matchLineGroup.addLayer(line);
+  console.log(matchLineGroup);
 };
 var matchLineGroup = L.featureGroup().addTo(map);
+
+
+
+// download GeoJSON
+var downloadGeoJSON = function() {
+  //TODO
+  console.log(matchLineGroup.toGeoJSON());
+}
 
 
 
