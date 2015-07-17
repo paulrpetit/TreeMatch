@@ -15,8 +15,19 @@
   <style>
     body { margin:0; padding:0;}
     #map { position:relative; top:0; bottom:0; background-color: 'white';}
+    .leaflet-container a {
+      color:#56b881 !important;
+    }
     a {
       color:#56b881;
+    }
+    a:hover{
+      background-color:#56b881;
+      color: white;
+    }
+    a:active, a:focus{
+      background-color: rgba(86,184,129,.6);
+      color: white;
     }
     .active {
       background-color: #56b881;
@@ -40,7 +51,7 @@
       <a id="match-table" href='#' class='block pad1y center keyline-bottom' style="height:40px;">Matches</a>
       <div id="guide-body" class="pad2 prose small keyline-bottom" style="padding-top:20px;">
         <h3>Introduction</h3>
-        <p>This application was created to facilitate the manual matching of tree databases. SF DPW has a historical tree database that is not spatially accurate but a spatially accurate and updated tree survey is in the works. This application allows for the manual matching of the historical data to the updated data. The new and updated tree survey is called the <strong>'Davy Tree Survey'</strong> and the old historical data is simply known as the <strong>'DPW Tree Database'</strong>.</p>
+        <p>This application was created to facilitate the manual matching of tree databases. SF DPW has a historical tree database that is not spatially accurate but a spatially accurate and updated tree survey is in the works. This application allows for the manual matching of the historical data to the updated data. The new and updated tree survey is called the <strong class="davyFont">'Davy Tree Survey'</strong> and the old historical data is simply known as the <strong class="dpwFont">'DPW Tree Database'</strong>.</p>
         <h3>Matching</h3>
         <p>To create a match between a tree in the 'Davy Tree Survey' layer and a tree in the 'DPW Tree Database' layer zoom to where both markers are on the map and select one record from each and press match. Some trees may be difficult to match or don't have a match, for this process only match the trees that are clearly a match. After creating matches you can press the CSV button to export a table with the headers.</p>
       </div>
