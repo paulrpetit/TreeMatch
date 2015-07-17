@@ -18,12 +18,12 @@ var map = L.mapbox.map('map', 'mapbox.streets-satellite', {
 
 // Set marker and popup properties for each layer
 for(i=0; i< davy.features.length; i++){
-  davy.features[i].properties['marker-color'] = "#56b881";
+  davy.features[i].properties['marker-color'] = "#e55e5e";
   davy.features[i].properties['marker-size'] = "small";
 }
 
 for(i=0; i< DPW.features.length; i++){
-  DPW.features[i].properties['marker-color'] = "#fbb03b";
+  DPW.features[i].properties['marker-color'] = "#f9886c";
   DPW.features[i].properties['marker-size'] = "small";
 }
 
@@ -167,7 +167,8 @@ var matchSelected = function() {
     });
   }
   var link = tableBodyMatches.appendChild(document.createElement('tr'));
-  link.innerHTML = '<td value=>'+ data[clickCounter][0] +'</td><td>'+data[clickCounter][1]+'</td><td>'+data[clickCounter][2]+'</td>'
+  link.setAttribute("id", "match"+data[clickCounter][0]);
+  link.innerHTML = '<td>'+ data[clickCounter][0] +'</td><td>'+data[clickCounter][1]+'</td><td>'+data[clickCounter][2]+'</td>'
 
   // create new line feature between matched points and add them to the group
   var filteredDavy = turf.filter(davy, 'FID_1', Math.floor(davyID));

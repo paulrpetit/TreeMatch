@@ -22,6 +22,12 @@
       background-color: #56b881;
       color: white;
     }
+    .dpwFont {
+      color: #f9886c;
+    }
+    .davyFont {
+      color: #e55e5e;
+    }
   </style>
 </head>
 <body>
@@ -45,10 +51,10 @@
               <th>
                 #
               </th>
-              <th>
+              <th class="davyFont">
                 Davy ID:
               </th>
-              <th>
+              <th class="dpwFont">
                 DPW ID:
               </th>
             </tr>
@@ -57,14 +63,15 @@
           </tbody>
         </table>
         <div class='pad1y center'>
-          <a href='#downloadCSV' onclick="downloadCSV()" id='downloadCSV' class='icon document button fill-mustard'>CSV</a>
+          <a href='#downloadCSV' onclick="downloadCSV()" id='downloadCSV' class='icon document button fill-green'>CSV</a>
+          <a href='#downloadGeoJSON' onclick="downloadGeoJSON()" id='downloadGeoJSON' class='icon document button fill-green'>GeoJSON</a>
         </div>
       </div>
     </nav>
     <div class='col9 pad2 fill-light' style="max-width:2000px !important;">
       <div class="col12 space-bottom" id="map" style="height:400px;"></div>
       <table>
-        <thead>
+        <thead class="davyFont">
           <tr>
             <th>
               Common:
@@ -87,7 +94,7 @@
         <a href='#match' id="match" onclick="matchSelected()" class='icon check button fill-green'>Match</a>
       </div>
       <table>
-        <thead>
+        <thead class="dpwFont">
           <tr>
             <th>
               Common:
