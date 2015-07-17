@@ -169,16 +169,18 @@ var matchSelected = function() {
   var link = tableBodyMatches.appendChild(document.createElement('tr'));
   link.innerHTML = '<td value=>'+ data[clickCounter][0] +'</td><td>'+data[clickCounter][1]+'</td><td>'+data[clickCounter][2]+'</td>'
 
-  /* create new line feature between matched points and add them to the group
+  // create new line feature between matched points and add them to the group
   var filteredDavy = turf.filter(davy, 'FID_1', Math.floor(davyID));
   var filteredDPW = turf.filter(DPW, 'TreeID', Math.floor(DpwID));
-  var filteredDavyLatLng = L.Latlng(filteredDPW.features[0].geometry.coordinates[1], filteredDPW.features[0].geometry.coordinates[1]);
-  var filteredDPWLatLng = L.Latlng(filteredDPW.features[0].geometry.coordinates[1], filteredDPW.features[0].geometry.coordinates[1]);
-  var line = L.polyline([filteredDPWLatLng,filteredDavyLatLng], {color: '#56b881'});
+
+  var filteredDavyLatLng = [filteredDavy.features[0].geometry.coordinates[1], filteredDavy.features[0].geometry.coordinates[0]];
+  var filteredDPWLatLng = [filteredDPW.features[0].geometry.coordinates[1], filteredDPW.features[0].geometry.coordinates[0]];
+
+  var line = L.polyline([filteredDPWLatLng,filteredDavyLatLng], {color: '#56b881', opacity: '1'});
   matchLineGroup.addLayer(line);
-  */
 };
 var matchLineGroup = L.featureGroup().addTo(map);
+
 
 
 // convert csv data and download
