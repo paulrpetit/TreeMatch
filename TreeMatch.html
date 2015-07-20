@@ -17,6 +17,7 @@
     #map { position:relative; top:0; bottom:0; background-color: 'white';}
     .leaflet-container a {
       color:#56b881 !important;
+      background-color: transparent !important;
     }
     a {
       color:#56b881;
@@ -75,7 +76,6 @@
         </table>
         <div class='pad1y center'>
           <a href='#downloadCSV' onclick="downloadCSV()" id='downloadCSV' class='icon document button fill-green'>CSV</a>
-          <a href='#downloadGeoJSON' onclick="downloadGeoJSON()" id='downloadGeoJSON' class='icon document button fill-green'>GeoJSON</a>
         </div>
       </div>
     </nav>
@@ -102,7 +102,7 @@
         </tbody>
       </table>
       <div class='pad1y center'>
-        <a href='#match' id="match" onclick="matchSelected()" class='icon check button fill-green'>Match</a>
+        <a href='#match' id="match" class='icon check button fill-green'>Match</a>
       </div>
       <table>
         <thead class="dpwFont">

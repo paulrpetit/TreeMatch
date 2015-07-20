@@ -142,6 +142,15 @@ map.on('move', function() {
 });
 
 
+$('#match').on('click', function(){
+  if($('#davy').children().hasClass('active') && $('#DPW').children().hasClass('active')){
+    matchSelected();
+  }
+  else {
+    alert('You must select one record from each table before pressing match.');
+  }
+});
+
 //CSV creation and export
 var data = [["Number of Match", "DavyID", "DPW-ID"]];
 var csvContent = "";
@@ -179,18 +188,8 @@ var matchSelected = function() {
 
   var line = L.polyline([filteredDPWLatLng,filteredDavyLatLng], {color: '#56b881', opacity: '1'});
   matchLineGroup.addLayer(line);
-  console.log(matchLineGroup);
 };
 var matchLineGroup = L.featureGroup().addTo(map);
-
-
-
-// download GeoJSON
-var downloadGeoJSON = function() {
-  //TODO
-  console.log(matchLineGroup.toGeoJSON());
-}
-
 
 
 // convert csv data and download
