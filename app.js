@@ -23,7 +23,7 @@ for(i=0; i< davy.features.length; i++){
 }
 
 for(i=0; i< DPW.features.length; i++){
-  DPW.features[i].properties['marker-color'] = "#f9886c";
+  DPW.features[i].properties['marker-color'] = "#3887be";
   DPW.features[i].properties['marker-size'] = "small";
 }
 
